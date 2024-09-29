@@ -28,6 +28,11 @@ You also may need to upload some file to the workspace from your local machine (
 For one unique file you may just use `scp`, but you also can mount the whole workspace with `sshfs`:    
 ```bash
 sudo apt install sshfs
-mkdir ~/folder-to-mount
-sshfs -o default_permissions username@remote-server:/workspace/repository-name ~/folder-to-mount
+mkdir ~/local-folder-name
+sshfs -o default_permissions username@remote-server:/workspace/$repository-name$ ~/local-folder-name
+```
+
+Once you finished your work, you should unmount:
+```bash
+fusermount -u ~/local-folder-name
 ```
