@@ -1,0 +1,3 @@
+tasks:
+  - name: Install Neovim
+    init: ./gitpod-install-neovim.sh
