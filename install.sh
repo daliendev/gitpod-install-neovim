@@ -2,10 +2,6 @@
 
 cd $(mktemp -d)
 
-# Install dependencies
-apt-get update
-apt-get install -y build-essential curl git
-
 # Install Nerd Fonts (FiraCode as an example)
 mkdir -p /home/gitpod/.local/share/fonts
 curl -fLo "/home/gitpod/.local/share/fonts/0xProto Nerd Font.ttf" \
