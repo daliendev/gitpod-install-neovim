@@ -2,44 +2,28 @@
 
 cd $(mktemp -d)
 
-URL="https://github.com/neovim/neovim/releases/latest/download/nvim.appimage"
-if test -n "$NEOVIM_VERSION"
-then
-    URL="https://github.com/neovim/neovim/releases/download/$NEOVIM_VERSION/nvim.appimage"
-fi
+# Install dependencies
+apt-get update
+apt-get install -y build-essential curl git
 
-curl -LO "$URL"
+# Install Nerd Fonts (FiraCode as an example)
+mkdir -p ~/.local/share/fonts
+curl -fLo "~/.local/share/fonts/0xProto Nerd Font.ttf" \
+    https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/0xProto.zip
+fc-cache -fv
+
+# Install Neovim
+curl -LO "https://github.com/neovim/neovim/releases/latest/download/nvim.appimage"
 chmod u+x nvim.appimage
 ./nvim.appimage --appimage-extract >/dev/null
 mkdir -p /home/gitpod/.local/bin
 ln -s $(pwd)/squashfs-root/AppRun /home/gitpod/.local/bin/nvim
 
-# Benchmarking different ways of installing nvim
+# Clone Neovim configuration 
+git clone --depth 1 https://github.com/daliendev/astro-nvim/ ~/.config/nvim
 
-# NIXSTART=$(date +%s.%N)
-# source $HOME/.profile
-# nix-env -iA nixpkgs.neovim
-# NIXEND=$(date +%s.%N)
-# NIXDIFF=$(echo "$NIXEND - $NIXSTART" | bc)
-# echo "Install with nix took $NIXDIFF" 1>&2
-# # Install with nix took 12.794308385
+# Install necessary LSP and plugins
+nvim --headless +Lazy! sync +qall
+nvim --headless -c "MasonInstall javascript typescript-language-server" -c "TSInstall javascript typescript" -c "qall"
 
-
-# APTSTART=$(date +%s.%N)
-# sudo apt install --yes neovim
-# APTEND=$(date +%s.%N)
-# APTDIFF=$(echo "$APTEND - $APTSTART" | bc)
-# echo "Install with apt took $APTDIFF" 1>&2
-# # Install with apt took 5.360583211
-
-
-# APPIMAGESTART=$(date +%s.%N)
-# curl -LO "https://github.com/neovim/neovim/releases/${${NVIM_VERSION:+download/$NVIM_VERSION}:-latest/download}/nvim.appimage"
-# chmod u+x nvim.appimage
-# ./nvim.appimage --appimage-extract >/dev/null
-# mkdir -p /home/gitpod/.local/bin
-# ln -s $(pwd)/squashfs-root/AppRun /home/gitpod/.local/bin/nvim
-# APPIMAGEEND=$(date +%s.%N)
-# APPIMAGEDIFF=$(echo "$APPIMAGEEND - $APPIMAGESTART" | bc)
-# echo "Install as appimage took $APPIMAGEDIFF" 1>&2
-# # Install as appimage took 3.029663746
+echo "Neovim setup completed!"
