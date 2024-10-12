@@ -18,7 +18,7 @@ fi
 git clone --depth 1 https://github.com/daliendev/astro-nvim/ "$HOME/.config/nvim"
 
 # Install necessary LSP and plugins
-nvim --headless +Lazy! sync +qall
+nvim --headless "+Lazy! sync" +qall
 
 # Install latest static tmux
 if ! command -v tmux &> /dev/null; then
