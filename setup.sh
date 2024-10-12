@@ -41,6 +41,6 @@ fi
 EOF
 
 # Download Gitpod Tmux Configuration
-curl -L "https://raw.githubusercontent.com/axonasif/gitpod.tmux/main/gitpod.tmux" --output ~/gitpod.tmux
+curl -L "https://raw.githubusercontent.com/daliendev/gitpod.tmux/refs/heads/main/gitpod.tmux" --output ~/gitpod.tmux
 chmod +x ~/gitpod.tmux
 ! grep -q 'gitpod.tmux' ~/.tmux.conf 2>/dev/null && echo "run-shell -b 'exec ~/gitpod.tmux'" >>~/.tmux.conf
