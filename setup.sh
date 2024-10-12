@@ -22,8 +22,12 @@ else
   echo "tmux already installed!"
 fi
 
+# remove any old nvim config
+rm -rf ~/.config/nvim
 # Clone Neovim configuration 
 git clone --depth 1 https://github.com/daliendev/astro-nvim/ "$HOME/.config/nvim"
+# Install necessary LSP and plugins
+nvim --headless '+Lazy! sync' +qall
 
 # Auto start tmux on SSH or xtermjs
 cat >>"$HOME/.bashrc" <<'EOF'
@@ -31,17 +35,10 @@ if test ! -v TMUX && (test -v SSH_CONNECTION || test "$PPID" == "$(pgrep -f '/id
   if ! tmux has-session 2>/dev/null; then
     # Create a new detached tmux session named "gitpod"
     tmux new-session -d -s gitpod -n "editor"
-    # Send the Neovim command to the session, it will install necessary LSP and plugins
-    tmux send-keys -t gitpod "nvim --headless '+Lazy! sync' +qall" C-m
   fi
   exec tmux attach
 fi
 EOF
-
-# Download Gitpod Tmux Configuration
-curl -L "https://raw.githubusercontent.com/axonasif/gitpod.tmux/main/gitpod.tmux" --output ~/gitpod.tmux
-chmod +x ~/gitpod.tmux
-! grep -q 'gitpod.tmux' ~/.tmux.conf 2>/dev/null && echo "run-shell -b 'exec ~/gitpod.tmux'" >>~/.tmux.conf
 
 # Install Nerd Font (JetBrainsMono Nerd Font) only if not already installed
 if ! fc-list | grep -qi "JetBrains Mono"; then
@@ -52,3 +49,8 @@ fi
 
 # Set Nerd Font in .tmux.conf
 ! grep -q 'Nerd Font' ~/.tmux.conf 2>/dev/null && echo "set-option -g default-terminal 'xterm-256color'" >>~/.tmux.conf
+
+# Download Gitpod Tmux Configuration
+curl -L "https://raw.githubusercontent.com/axonasif/gitpod.tmux/main/gitpod.tmux" --output ~/gitpod.tmux
+chmod +x ~/gitpod.tmux
+! grep -q 'gitpod.tmux' ~/.tmux.conf 2>/dev/null && echo "run-shell -b 'exec ~/gitpod.tmux'" >>~/.tmux.conf
