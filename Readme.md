@@ -15,7 +15,7 @@ Neovim will be installed with an Astro-Neovim [configuration](https://github.com
 [Gitpod Docs: Create and connect to a workspace with SSH](https://www.gitpod.io/docs/references/gitpod-cli#create-and-connect-to-a-workspace-with-ssh)
 
 #### (Optional) Get a Nerd Font      
-*(install it on the system, e.g. on Windows for WSL2)*     
+*install it on the system, e.g. on Windows for WSL2 Terminal, or directly in the web browser for the [Gitpod Browser Terminal](https://github.com/gitpod-io/xterm-web-ide?tab=readme-ov-file)*     
 
 If you haven't installed it yet, you might need a Nerd Font on the terminal you'll use to connect to the Gitpod Workspace via SSH.     
 https://www.nerdfonts.com/font-downloads    
