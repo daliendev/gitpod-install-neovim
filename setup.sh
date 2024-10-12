@@ -40,16 +40,6 @@ if test ! -v TMUX && (test -v SSH_CONNECTION || test "$PPID" == "$(pgrep -f '/id
 fi
 EOF
 
-# Install Nerd Font (JetBrainsMono Nerd Font) only if not already installed
-if ! fc-list | grep -qi "JetBrains Mono"; then
-  curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip -o ~/JetBrainsMono.zip
-  unzip ~/JetBrainsMono.zip -d ~/.local/share/fonts
-  fc-cache -fv
-fi
-
-# Set Nerd Font in .tmux.conf
-! grep -q 'Nerd Font' ~/.tmux.conf 2>/dev/null && echo "set-option -g default-terminal 'xterm-256color'" >>~/.tmux.conf
-
 # Download Gitpod Tmux Configuration
 curl -L "https://raw.githubusercontent.com/axonasif/gitpod.tmux/main/gitpod.tmux" --output ~/gitpod.tmux
 chmod +x ~/gitpod.tmux
