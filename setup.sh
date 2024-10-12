@@ -50,4 +50,4 @@ if ! fc-list | grep -qi "JetBrains Mono"; then
 fi
 
 # Set Nerd Font in .tmux.conf
-! grep -q 'Nerd Font' ~/.tmux.conf 2>/dev/null && echo "set-option -g default-terminal 'screen-256color'" >>~/.tmux.conf
+! grep -q 'Nerd Font' ~/.tmux.conf 2>/dev/null && echo "set-option -g default-terminal 'xterm-256color'" >>~/.tmux.conf
