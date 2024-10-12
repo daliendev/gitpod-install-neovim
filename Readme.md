@@ -7,8 +7,11 @@ Just by connecting to the workspace from a terminal.
 ### How:    
  
 By setting `https://github.com/daliendev/gitpod-install-neovim` as Gitpod Dotfiles repository in [gitpod.io/preferences](https://gitpod.io/preferences),     
-Neovim will be installed with an Astro-Neovim [configuration](https://github.com/daliendev/astro-nvim) in every Gitpod workspace.    
-*(you may update the script with the URL of your own repository if needed)*
+Neovim will be installed with an Astro-Neovim [configuration](https://github.com/daliendev/astro-nvim) in any Gitpod workspace you'll use.    
+
+> You may fork this repository and update the `setup.sh` file with the URL of your own repository.
+
+[Gitpod Docs: Create and connect to a workspace with SSH](https://www.gitpod.io/docs/references/gitpod-cli#create-and-connect-to-a-workspace-with-ssh)
 
 #### (Optional) Get a Nerd Font      
 *(install it on the system, e.g. on Windows for WSL2)*     
@@ -22,7 +25,7 @@ As you work on creating something new, you might want to view your changes in a 
 ```bash
 ssh -L $PORT$:localhost:$PORT$ username@remote-server
 ```
-More details in Gitpod docs: https://www.gitpod.io/docs/configure/workspaces/ports
+[Gitpod docs: Local port forwarding via SSH](https://www.gitpod.io/docs/configure/workspaces/ports#local-port-forwarding-via-ssh)
 
 #### (Optional) Mount the workspace directory
 
