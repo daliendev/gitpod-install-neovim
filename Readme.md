@@ -2,7 +2,8 @@
 
 ### Goal:   
 Use [Neovim](https://github.com/neovim/neovim) as primary IDE inside [Gitpod](https://www.gitpod.io/) workspaces.    
-Just by connecting to the workspace from a terminal.    
+Just by connecting to the workspace from a terminal or directly through the browser.     
+🔋 Batteries are included with [tmux](https://github.com/gitpod-samples/gitpod.tmux)   
 
 ### How:    
  
