@@ -14,12 +14,6 @@ else
   echo "Neovim already installed!"
 fi
 
-# Clone Neovim configuration 
-git clone --depth 1 https://github.com/daliendev/astro-nvim/ "$HOME/.config/nvim"
-
-# Install necessary LSP and plugins
-nvim --headless "+Lazy! sync" +qall
-
 # Install latest static tmux
 if ! command -v tmux &> /dev/null; then
   sudo curl -L https://github.com/axonasif/build-static-tmux/releases/latest/download/tmux.linux-amd64.stripped -o /usr/bin/tmux
@@ -51,3 +45,9 @@ fi
 
 # Set Nerd Font in .tmux.conf
 ! grep -q 'Nerd Font' ~/.tmux.conf 2>/dev/null && echo "set-option -g default-terminal 'xterm-256color'" >>~/.tmux.conf
+
+# Clone Neovim configuration 
+git clone --depth 1 https://github.com/daliendev/astro-nvim/ "$HOME/.config/nvim"
+
+# Install necessary LSP and plugins
+nvim --headless "+Lazy! sync" +qall
